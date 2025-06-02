@@ -1,0 +1,526 @@
+body {
+  margin: 0;
+  display: flex;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+}
+
+/* Menu lateral fixo à esquerda */
+.menu-lateral {
+  width: 60px; /* fechado por padrão */
+  background-color: #fefeff;
+  color: #59f332;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease;
+  overflow: hidden;
+}
+
+/* Expande ao passar o mouse */
+.menu-lateral:hover {
+  width: 250px;
+}
+
+/* Logo */
+.logo-container {
+  width: 40%;
+  margin-bottom: 30px;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-lateral:not(:hover) .logo-container {
+  width: 100%;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 20px 20px 0 20px;
+}
+
+/* Links do menu */
+.menu-links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+.menu-links a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #f700ff;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.menu-links a:hover {
+  background-color: #d0d0d6;
+}
+
+.menu-links i {
+  width: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Esconde o texto quando fechado */
+.menu-lateral:not(:hover) a span {
+  display: none;
+}
+.menu-lateral a span {
+  color: #3333338f;         /* Altere para a cor desejada */
+  font-weight: bold;   /* Negrito */
+}
+
+
+/* Botão "Sair" na parte inferior */
+.menu-sair {
+  width: 100%;
+  padding: 0 20px;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.menu-sair a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #f700ff;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.menu-sair a:hover {
+  background-color: #d0d0d6;
+}
+
+.menu-sair i {
+  width: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+.conteudo-principal {
+  margin-left: 250px; /* espaço para o menu expandido */
+  padding: 40px;
+  flex: 1;
+  background-color: #ffffff;
+  transition: margin-left 0.3s ease;
+}
+
+/* Ajuste para quando o menu estiver colapsado */
+.menu-lateral:not(:hover) ~ .conteudo-principal {
+  margin-left: 60px;
+}
+
+/* Área de boas-vindas */
+.boas-vindas {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #f332c3;
+}
+.menu-horizontal-interno {
+  background-color: #f9f9f9;
+  padding: 16px 24px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between; /* Alinha conteúdo à esquerda e ícones à direita */
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  flex-wrap: wrap;
+}
+
+.menu-horizontal-conteudo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.icone-dashboard {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  color: #000000;
+  font-size: 16px;
+}
+
+.icone-dashboard i {
+  font-size: 25px;
+  color: #f332c3;
+}
+
+.mensagem-dashboard h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.mensagem-dashboard p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.menu-horizontal-icones {
+  display: flex;
+  gap: 12px;
+}
+
+.card-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:  #83818225;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(226, 224, 224, 0.356);
+  padding: 12px;
+  width: 45px;
+  height: 45px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.card-icone i {
+  font-size: 18px;
+  color: #f332c3;
+}
+
+.card-icone:hover {
+  transform: scale(1.1);
+}
+
+
+
+
+.cards-valores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  flex: 1;
+  min-width: 280px;
+  max-width: 300px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.card .data {
+  display: inline-block;
+  background-color: #e6e6e6;
+  color: #333;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+
+.card h4 {
+  font-size: 14px;
+  color: #555;
+  margin: 0 0 10px;
+}
+
+.card h2 {
+  font-size: 26px;
+  margin: 0 0 8px;
+  color: #111;
+}
+
+.card p {
+  font-size: 14px;
+  color: #888;
+}
+
+.card .sub {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Cores específicas */
+.card-verde {
+  border-left: 5px solid #4CAF50;
+  background: linear-gradient(120deg, #eaffea 0%, #f6fff6 100%);
+}
+
+.card-azul {
+  border-left: 5px solid #2196F3;
+  background: linear-gradient(120deg, #e3f2fd 0%, #f0faff 100%);
+}
+
+.card-vermelho {
+  border-left: 5px solid #F44336;
+  background: linear-gradient(120deg, #fdecea 0%, #fff5f5 100%);
+}
+.card-roxo {
+  border-left: 5px solid #9c27b0;
+  background: linear-gradient(120deg, #f3e5f5 0%, #faf0ff 100%);
+}
+
+.grafico-expandido {
+  height: 400px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+}
+
+#graficoFaturamentoLucro {
+  width: 100% !important;
+  height: 100% !important; /* usar 100% para preencher o container */
+}
+  
+.menu-horizontal-data {
+  background-color: #ffffff;
+  margin-top: 16px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filtro-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filtro-info i {
+  font-size: 30px;
+  color: #f332c3;
+}
+
+.filtro-texto strong {
+  display: block;
+  font-size: 16px;
+  color: #141414;
+}
+
+.filtro-texto span {
+  font-size: 13px;
+  color: #777;
+}
+
+.filtro-seta i {
+  font-size: 18px;
+  color: #111111;
+}
+ 
+.painel-filtro {
+  background: #f9f9f9;
+  padding: 16px 24px;
+  border-radius: 0 0 12px 12px;
+  margin-top: 10px;
+  transition: max-height 0.3s ease;
+}
+
+/* Roda seta quando aberto */
+.seta-ativa {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease;
+}
+
+
+.painel-filtro label {
+  display: block;
+  color: #333;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.abas-periodo {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.aba {
+  background-color: #f332c3;
+  border: none;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.aba:not(.active) {
+  background-color: transparent;
+  border: 2px solid #f332c3;
+  color: #f332c3;
+}
+
+.aba:hover {
+  background-color: #f77ec9;
+  color: white;
+}
+
+.calendario-container {
+  margin-top: 10px;
+}
+
+.calendario-input {
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid #f332c3;
+  font-size: 16px;
+  width: 250px;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day:hover {
+  background: #f332c3 !important;
+  color: white;
+  border-radius: 10px;
+}
+ 
+/* Estilo para o botão Adicionar */
+#addBtn {
+  background-color: #f332c3;/* rosa vivo */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#addBtn:hover {
+  background-color: #f332c3;
+  border-radius: 10%; /* rosa mais escuro no hover */
+}
+
+/* Espaçamento para inputs e labels */
+#skuInput, #qtyInput {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+label {
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+/* Estilo da tabela */
+/* Tabela sem contorno e com linhas suaves */
+#produtosTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.05); /* leve sombra opcional */
+}
+
+/* Cabeçalho com fundo suave */
+#produtosTable thead tr {
+  background-color: #f5f5f5;
+}
+
+/* Células com borda inferior clara */
+#produtosTable th, #produtosTable td {
+  padding: 10px 8px;
+  text-align: left;
+  border-bottom: 1px solid #eaeaea; /* linha bem clarinha */
+  color: #0505058f;
+}
+
+/* Linhas com zebra clara */
+#produtosTable tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+
+/* Imagem pequena na tabela */
+#produtosTable img {
+  border-radius: 3px;
+  max-width: 90px;
+  max-height: 90px;
+}
+
+/* Botões ação dentro da tabela */
+#produtosTable button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+
+}
+
+#produtosTable button.edit-btn {
+  color: #007bff;
+}
+
+#produtosTable button.delete-btn {
+  color: #dc3545;
+  margin-left: 10px;
+}
+ 
+#pdfBtn {
+  background-color: #f332c3; /* rosa vivo */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+#pdfBtn:hover {
+  background-color: #f332c3;
+  border-radius: 10%; /* borda mais arredondada no hover */
+}

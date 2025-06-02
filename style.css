@@ -1,0 +1,190 @@
+/* App.css */
+
+* {
+  box-sizing: border-box;
+}
+
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  max-width: 960px;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+@media(min-width: 768px) {
+  .card {
+    flex-direction: row;
+  }
+}
+
+.left-side, .right-side {
+  padding: 40px;
+}
+
+.left-side {
+  flex: 1;
+}
+
+.right-side {
+  flex: 1;
+  background-color: #f9fafb;
+  display: none; /* esconder no mobile */
+}
+
+@media(min-width: 768px) {
+  .right-side {
+    display: block;
+  }
+}
+
+.logo {
+  height: 48px;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #111827;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 32px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  background-color: #eff6ff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.input:focus {
+  border-color: #ec4899;
+  box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.3);
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.forgot-password a {
+  font-size: 13px;
+  color: #ec4899;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  width: 100%;
+  background-color: #ec4899;
+  color: white;
+  padding: 14px;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #db2777;
+}
+
+.signup-text {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 20px;
+  color: #6b7280;
+}
+
+.signup-text a {
+  color: #ec4899;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+/* Right side */
+
+.highlight-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: #db2777;
+  margin-bottom: 4px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111827;
+}
+
+.description {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 24px;
+}
+
+.logos {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.logo-small {
+  height: 70px;
+  object-fit: contain;
+}
+
+.dashboard-img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}

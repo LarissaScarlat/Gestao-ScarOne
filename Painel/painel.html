@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/style.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/monthSelect/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+
+
+  <!-- Ícones Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Biblioteca Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Título da Página -->
+  <title>Gestão Ecommerce</title>
+
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="/Painel/painel.css">
+</head>
+
+<body>
+    <aside class="menu-lateral">
+  <div class="logo-container">
+    <img src="#" alt="Logotipo" class="logo" />
+  </div>
+  <nav class="menu-links">
+    <a href="#"><i class="fa-solid fa-list"></i></a>
+    <a href="#"><i class="fa-solid fa-house"></i> <span>Início</span></a>
+    <a href="#"><i class="fa-solid fa-chart-simple"></i> <span>Dashboard</span></a>
+    <a href="#"><i class="fa-solid fa-file"></i> <span>Relatórios</span></a>
+    <a href="/Painel/Ordem de compra/compras.html"><i class="fa-solid fa-truck"></i> <span>Compras</span></a>
+    <a href="#"><i class="fa-solid fa-money-bill"></i> <span>Vendas</span></a>
+    <a href="#"><i class="fa-solid fa-box-archive"></i> <span>Produtos</span></a>
+    <a href="#"><i class="fa-solid fa-medal"></i> <span>Meta</span></a>
+  </nav>
+  <div class="menu-sair">
+    <a href="/index.html"><i class="fa-solid fa-right-from-bracket"></i> <span>Sair</span></a>
+  </div>
+</aside>
+  <main class="conteudo-principal">
+  <div class="boas-vindas">
+    <img src="/image/jk.jpg" alt="Avatar" class="avatar">
+    <h1>Olá, Jk Óticas</h1>
+  </div>
+
+<br><br>
+<div class="menu-horizontal-interno">
+  <div class="menu-horizontal-conteudo">
+    <div class="icone-dashboard">
+      <i class="fa-solid fa-chart-simple"></i>
+      <span>Dashboard</span>
+    </div>
+
+    <div class="mensagem-dashboard">
+      <h2>Explore seu novo dashboard!</h2>
+      <p>Tome decisões mais inteligentes, rápidas e fundamentadas.</p>
+      <p>Vamos juntos otimizar seu sucesso!</p>
+    </div>
+  </div>
+
+  <div class="menu-horizontal-icones">
+    <a href="#" class="card-icone">
+      <i class="fa-solid fa-file"></i>
+    </a>
+    <a href="#" class="card-icone">
+      <i class="fa-solid fa-truck"></i>
+    </a>
+    <a href="#" class="card-icone">
+      <i class="fa-solid fa-money-bill"></i>
+    </a>
+  </div>
+</div>
+
+<div class="menu-horizontal-data" id="menu-horizontal-data">
+  <div class="filtro-info" id="btn-filtro" style="cursor:pointer;">
+    <i class="fa-solid fa-filter"></i>
+    <div class="filtro-texto">
+      <strong>Filtro</strong>
+      <span>Verificar períodos e comparar</span>
+    </div>
+  </div>
+  <div class="filtro-seta" id="seta-filtro">
+    <i class="fa-solid fa-arrow-right"></i>
+  </div>
+</div>
+
+<div class="painel-filtro" id="painel-filtro" style="display:none;">
+  <label>Escolha o período:</label>
+  <div class="abas-periodo">
+    <button class="aba" data-tipo="dia">Dia</button>
+<button class="aba" data-tipo="semana">Semana</button>
+<button class="aba" data-tipo="mes">Mês</button>
+
+  </div>
+</div>
+
+<div class="calendario-container" id="calendario-container" style="display: none;">
+  <input id="datepicker" class="calendario-input" placeholder="Escolha a data" />
+</div>
+ 
+
+<div class="cards-valores">
+
+  <div class="card card-verde">
+    <h4>Total de faturamento</h4>
+    <h2>R$1.000.000</h2>
+  </div>
+
+  <div class="card card-azul">
+    <h4>Valor investido em produtos</h4>
+    <h2>R$50.000</h2>
+  </div>
+
+  <div class="card card-vermelho">
+    <h4>Valor total de gastos</h4>
+    <h2>R$130.000</h2>
+    
+  </div>
+  <div class="card card-roxo">
+  <h4>Lucro liquido</h4>
+  <h2>R$180.000</h2> <!-- Exemplo: 50.000 + 130.000 -->
+</div>
+</div>
+
+<br><br>
+<div class="grafico-expandido">
+  <canvas id="graficoFaturamentoLucro"></canvas>
+</div>
+
+
+</main>
+
+<script src="/Painel/filtro.js" defer></script>
+<script type="module" src="/Painel/Dashboard/cards.js"></script>
+
+
+</body>
+</html>

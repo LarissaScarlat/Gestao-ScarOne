@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- jsPDF principal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- jsPDF AutoTable (para gerar tabelas bonitas) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+
+
+  <!-- Ícones Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Biblioteca Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Título da Página -->
+  <title>Gestão Ecommerce</title>
+
+  <!-- CSS personalizado -->
+  <link rel="stylesheet" href="/Painel/painel.css">
+</head>
+
+<body>
+    <aside class="menu-lateral">
+  <div class="logo-container">
+    <img src="#" alt="Logotipo" class="logo" />
+  </div>
+  <nav class="menu-links">
+    <a href="#"><i class="fa-solid fa-list"></i></a>
+    <a href="/Painel/painel.html"><i class="fa-solid fa-house"></i> <span>Início</span></a>
+    <a href="#"><i class="fa-solid fa-chart-simple"></i> <span>Dashboard</span></a>
+    <a href="#"><i class="fa-solid fa-file"></i> <span>Relatórios</span></a>
+    <a href="/Painel/Ordem de compra/compras.html"><i class="fa-solid fa-truck"></i> <span>Compras</span></a>
+    <a href="#"><i class="fa-solid fa-money-bill"></i> <span>Vendas</span></a>
+    <a href="#"><i class="fa-solid fa-box-archive"></i> <span>Produtos</span></a>
+    <a href="#"><i class="fa-solid fa-medal"></i> <span>Meta</span></a>
+  </nav>
+  <div class="menu-sair">
+    <a href="/index.html"><i class="fa-solid fa-right-from-bracket"></i> <span>Sair</span></a>
+  </div>
+</aside>
+  <main class="conteudo-principal">
+  <div class="boas-vindas">
+    <img src="/image/jk.jpg" alt="Avatar" class="avatar">
+    <h1>Olá, Jk Óticas</h1>
+  </div>
+
+<br><br>
+<div class="menu-horizontal-interno">
+  <div class="menu-horizontal-conteudo">
+    <div class="icone-dashboard">
+      <i class="fa-solid fa-box-archive"></i>
+      <span>Produtos</span>
+    </div>
+
+    <div class="mensagem-dashboard">
+      <h2>Explore os seus produtos!</h2>
+      <p>Tome decisões mais inteligentes, rápidas e fundamentadas.</p>
+      <p>Vamos juntos otimizar seu sucesso!</p>
+    </div>
+  </div>
+
+  <div class="menu-horizontal-icones">
+    <a href="#" class="card-icone">
+      <i class="fa-solid fa-file"></i>
+    </a>
+    <a href="#" class="card-icone">
+      <i class="fa-solid fa-truck"></i>
+    </a>
+    <a href="#" class="card-icone">
+      <i class="fa-solid fa-money-bill"></i>
+    </a>
+  </div>
+</div>
+<!-- Div com SKU, Quantidade e botão -->
+<div style="margin: 20px 0;">
+  <label for="skuInput">SKU:</label>
+  <input type="text" id="skuInput" placeholder="Digite o SKU" />
+
+  <label for="qtyInput" style="margin-left: 15px;">Quantidade:</label>
+  <input type="number" id="qtyInput" min="1" value="1" style="width: 60px;" />
+
+  <button id="addBtn" style="margin-left: 15px;">Adicionar</button>
+  <button id="pdfBtn" onclick="gerarPDF()">Baixar PDF</button>
+
+</div>
+
+<!-- Tabela com os dados -->
+<table id="produtosTable" border="1" cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+  <thead style="background-color: #eee;">
+    <tr>
+      <th>SKU</th>
+      <th>Marca</th>
+      <th>Preço</th>
+      <th>Quantidade</th>
+      <th>Foto</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script type="module" src="/Painel/Ordem de compra/compra.js"></script>
+
+<script>
+  async function gerarPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Título
+    doc.setFontSize(16);
+    doc.text("Ordem de Compra", 14, 15);
+
+    const rows = document.querySelectorAll("#produtosTable tbody tr");
+    const tableData = [];
+
+    // Carrega imagens para PDF
+    const imagePromises = [];
+
+    rows.forEach((row) => {
+      const cols = row.querySelectorAll("td");
+      const sku = cols[0].textContent.trim();
+      const marca = cols[1].textContent.trim();
+      const quantidade = cols[3].textContent.trim();
+      const img = cols[4].querySelector("img");
+
+      // Converte imagem em base64
+      const imagePromise = fetch(img.src)
+        .then(res => res.blob())
+        .then(blob => {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.readAsDataURL(blob);
+          });
+        });
+
+      imagePromises.push(imagePromise);
+
+      // Adiciona texto na tabela temporariamente, imagem entra depois
+      tableData.push([sku, marca, quantidade, ""]);
+    });
+
+    const imageDataArray = await Promise.all(imagePromises);
+
+    // Gera tabela com jsPDF AutoTable
+    doc.autoTable({
+      startY: 25,
+      head: [['SKU', 'Marca', 'Quantidade', 'Foto']],
+      body: tableData,
+      theme: 'grid',
+      styles: {
+        cellPadding: 4,
+        fontSize: 10,
+        halign: 'left',
+        valign: 'middle'
+      },
+      columnStyles: {
+        0: { cellWidth: 30 },
+        1: { cellWidth: 40 },
+        2: { cellWidth: 30 },
+        3: { 
+          cellWidth: 50,
+          cellPadding: { top: 15, bottom: 15, left: 4, right: 4 }  // aumenta padding vertical da coluna foto
+        }
+      },
+      didDrawCell: function (data) {
+        if (data.column.index === 3 && data.row.index < imageDataArray.length) {
+          doc.addImage(
+            imageDataArray[data.row.index],
+            'JPEG',
+            data.cell.x + 5,
+            data.cell.y + 5,
+            20,   // largura da imagem
+            20    // altura da imagem
+          );
+        }
+      }
+    });
+
+    doc.save("produtos.pdf");
+  }
+</script>
+
+
+
+</body>
+</html>

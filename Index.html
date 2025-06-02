@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestão Scar One</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <!-- Left / Login -->
+      <div class="left-side">
+        <img src="https://via.placeholder.com/150x50?text=Logo" alt="Gestão Scar One" class="logo" />
+        <h2 class="title">Seja bem-vindo</h2>
+        <p class="subtitle">Por favor, digite seus dados</p>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="email@exemplo.com" class="input" id="email" required />
+          </div>
+          <div class="form-group">
+            <label>Senha</label>
+            <input type="password" placeholder="••••••••" class="input" id="password" required />
+          </div>
+          <div class="forgot-password">
+            <a href="#">Esqueci a senha</a>
+          </div>
+         <button id="btn-login" type="submit" class="btn-primary">Entrar</button>
+          <p id="error-message" style="color:red;"></p>
+          <p class="signup-text">
+            Ainda não tem uma conta? <a href="#">Experimente grátis</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Right / Info and Image -->
+      <div class="right-side">
+        <p class="highlight-text">Sua Porta de Entrada para o Sucesso</p>
+        <h3 class="section-title">Acesso à Plataforma de Gestão de Alto Desempenho</h3>
+        <p class="description">
+          Faça login e mergulhe em um mundo de eficiência e praticidade, onde cada clique traz novas oportunidades de crescimento.
+        </p>
+        <div class="logos">
+          <img src="/image/Bling.png" alt="Bling" class="logo-small" />
+          <img src="/image/shopee.png" alt="Amazon" class="logo-small" />
+          <img src="/image/Mercadolivre.png" alt="Mercadolivre" class="logo-small" />
+        </div>
+        <img src="https://via.placeholder.com/400x250?text=Dashboard" alt="Dashboard" class="dashboard-img" />
+      </div>
+    </div>
+  </div>
+
+  <script src="/auth.js"></script>
+</body>
+</html>
