@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const tabela = document.getElementById('corpoTabelaProdutos');
 
   try {
-    const resposta = await fetch('https://bling.scarone.com.br/bling/produtos'); // ✅ URL correta
+    const resposta = await fetch('https://api.bling.com.br/Api/v3/produtos'); // ✅ URL correta
     const produtos = await resposta.json();
 
     produtos.forEach(produto => {
