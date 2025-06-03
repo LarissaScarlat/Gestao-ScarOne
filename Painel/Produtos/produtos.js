@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const tabela = document.getElementById('corpoTabelaProdutos');
 
   try {
-    const resposta = await fetch('/produtos');
+   const resposta = await fetch('/bling/produtos');
+
     const produtos = await resposta.json();
 
     produtos.forEach(produto => {
