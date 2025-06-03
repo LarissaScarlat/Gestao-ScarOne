@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const tabela = document.getElementById('corpoTabelaProdutos');
 
   try {
- const resposta = await fetch('http://localhost:3002/bling/produtos');
+const resposta = await fetch('https://api.scarone.com.br/bling/produtos');
+
 
 
     const produtos = await resposta.json();
