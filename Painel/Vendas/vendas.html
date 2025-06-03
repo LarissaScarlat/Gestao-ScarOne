@@ -113,39 +113,44 @@
     </table>
   </main>
 <script>
-async function buscarPedido(orderId) {
+async function buscarPedidosHoje() {
     try {
-        const response = await fetch(`https://scarone.com.br/api/pedido/${orderId}`);
-        const data = await response.json();
+        const response = await fetch(`https://scarone.com.br/api/pedidos-hoje`);
+        const pedidos = await response.json();
 
-        console.log(data);
+        console.log(pedidos);
 
-        // Alimentar a tabela
         const tabela = document.getElementById('corpoTabelaProdutos');
 
-        const novaLinha = document.createElement('tr');
+        // Limpa a tabela antes
+        tabela.innerHTML = '';
 
-        novaLinha.innerHTML = `
-            <td>Produto Exemplo</td>
-            <td>${data.numeroVenda}</td>
-            <td>${data.skuProduto}</td>
-            <td>R$ 0,00</td>
-            <td>R$ ${data.precoVenda.toFixed(2)}</td>
-            <td>0</td>
-            <td>Mercado Livre</td>
-            <td>Ativo</td>
-        `;
+        pedidos.forEach(data => {
+            const novaLinha = document.createElement('tr');
 
-        tabela.appendChild(novaLinha);
+            novaLinha.innerHTML = `
+                <td>Produto Exemplo</td>
+                <td>${data.numeroVenda}</td>
+                <td>${data.skuProduto}</td>
+                <td>R$ 0,00</td>
+                <td>R$ ${data.precoVenda.toFixed(2)}</td>
+                <td>0</td>
+                <td>Mercado Livre</td>
+                <td>Ativo</td>
+            `;
+
+            tabela.appendChild(novaLinha);
+        });
 
     } catch (error) {
-        console.error('Erro ao buscar pedido:', error);
+        console.error('Erro ao buscar pedidos de hoje:', error);
     }
 }
 
-// Exemplo de chamada automática
-buscarPedido('1234567890');
+// Chamada automática ao carregar a página
+document.addEventListener('DOMContentLoaded', buscarPedidosHoje);
 </script>
+
 
 
 </body>
