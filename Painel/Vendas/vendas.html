@@ -112,6 +112,40 @@
       </tbody>
     </table>
   </main>
+<script>
+async function buscarPedido(orderId) {
+    try {
+        const response = await fetch(`https://scarone.com.br/api/pedido/${orderId}`);
+        const data = await response.json();
+
+        console.log(data);
+
+        // Alimentar a tabela
+        const tabela = document.getElementById('corpoTabelaProdutos');
+
+        const novaLinha = document.createElement('tr');
+
+        novaLinha.innerHTML = `
+            <td>Produto Exemplo</td>
+            <td>${data.numeroVenda}</td>
+            <td>${data.skuProduto}</td>
+            <td>R$ 0,00</td>
+            <td>R$ ${data.precoVenda.toFixed(2)}</td>
+            <td>0</td>
+            <td>Mercado Livre</td>
+            <td>Ativo</td>
+        `;
+
+        tabela.appendChild(novaLinha);
+
+    } catch (error) {
+        console.error('Erro ao buscar pedido:', error);
+    }
+}
+
+// Exemplo de chamada automática
+buscarPedido('1234567890');
+</script>
 
 
 </body>
