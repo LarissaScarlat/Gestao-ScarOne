@@ -1,14 +1,8 @@
-// produtos.js
-
 document.addEventListener('DOMContentLoaded', async () => {
   const tabela = document.getElementById('corpoTabelaProdutos');
 
   try {
-const url = 'https://bling.scarone.com.br/bling/produtos';
-
-
-
-
+    const resposta = await fetch('https://bling.scarone.com.br/bling/produtos'); // ✅ URL correta
     const produtos = await resposta.json();
 
     produtos.forEach(produto => {
