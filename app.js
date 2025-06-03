@@ -231,13 +231,12 @@ blingRouter.get('/produtos', async (req, res) => {
     res.status(500).send('Erro ao buscar produtos.');
   }
 });
- 
-// Use o router
-app.use('/', blingRouter); // ou '/bling'
+// Conectar o router do Bling à rota /bling
+app.use('/bling', blingRouter);
 
-// Inicia o servidor
+// Iniciar servidor
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
 });
 
 // Carrega os tokens na inicialização
