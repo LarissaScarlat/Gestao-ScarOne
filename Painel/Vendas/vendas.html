@@ -76,6 +76,43 @@
     </a>
   </div>
 </div>
+<div class="filtro-produto" style="margin-top: 30px; display: flex; gap: 10px; align-items: center;">
+  <input
+    type="text"
+    id="skuInput"
+    placeholder="Digite o SKU do produto"
+    style="padding: 10px; border: 2px solid #ccc; border-radius: 8px; width: 250px;"
+  >
+  <button
+    onclick="buscarProdutoPorSKU()"
+    style="background-color: #ff4fa1; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer;"
+  >
+    <i class="fa fa-search"></i> Buscar
+  </button>
+</div>
+
+<main class="conteudo-produtos">
+    <h2>Produtos Cadastrados</h2>
+
+    <table class="tabela-card">
+      <thead>
+        <tr>
+          <th>Nome do Produto</th>
+          <th>N° da Venda</th>
+          <th>SKU</th>
+          <th>Preço de Custo</th>
+          <th>Preço de Venda</th>
+          <th>Estoque</th>
+          <th>Integração</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="corpoTabelaProdutos">
+        <!-- Dados preenchidos via JS -->
+      </tbody>
+    </table>
+  </main>
+
 
 </body>
 </html>
