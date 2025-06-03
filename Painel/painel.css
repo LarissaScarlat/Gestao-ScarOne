@@ -590,4 +590,13 @@ label {
   height: 200px;
   border-radius: 50%;
   object-fit: cover;
+} 
+
+.icone-img {
+  width: 100px;        /* aumenta o tamanho */
+  height: 100px;
+  border-radius: 50%;  /* deixa redonda */
+  object-fit: cover;   /* mantém o recorte centralizado e sem distorção */
+  border: 3px solid #ccc; /* opcional: borda para destacar */
+  margin: 5px;         /* espaçamento entre imagens */
 }
