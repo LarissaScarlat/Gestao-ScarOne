@@ -524,3 +524,41 @@ label {
   background-color: #f332c3;
   border-radius: 10%; /* borda mais arredondada no hover */
 }
+
+/* Tabela com estilo de "card" */
+.tabela-card {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px;
+}
+
+.tabela-card thead {
+  background-color: #f3f3f3;
+}
+
+.tabela-card th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tabela-card tbody tr {
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  transition: transform 0.2s;
+}
+
+.tabela-card tbody tr:hover {
+  transform: scale(1.01);
+}
+
+.tabela-card td {
+  padding: 16px;
+  font-size: 14px;
+  border: none;
+  color: #333;
+}

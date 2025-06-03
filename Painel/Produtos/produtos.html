@@ -89,8 +89,29 @@
   </button>
 </div>
 
-<!-- Aqui será exibido o resultado da busca -->
-<div id="resultadoProduto" style="margin-top: 20px; background: #f7f7f7; padding: 15px; border-radius: 10px; display: none;"></div>
+<main class="conteudo-produtos">
+    <h2>Produtos Cadastrados</h2>
+
+    <table class="tabela-card">
+      <thead>
+        <tr>
+          <th>Nome do Produto</th>
+          <th>Variações</th>
+          <th>SKU</th>
+          <th>Preço de Custo</th>
+          <th>Preço de Venda</th>
+          <th>Estoque</th>
+          <th>Integração</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="corpoTabelaProdutos">
+        <!-- Dados preenchidos via JS -->
+      </tbody>
+    </table>
+  </main>
+
+
 <script>
   async function buscarProdutoPorSKU() {
     const sku = document.getElementById('skuInput').value.trim();
