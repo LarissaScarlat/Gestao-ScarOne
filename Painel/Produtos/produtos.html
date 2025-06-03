@@ -74,3 +74,60 @@
     </a>
   </div>
 </div>
+<div class="filtro-produto" style="margin-top: 30px; display: flex; gap: 10px; align-items: center;">
+  <input
+    type="text"
+    id="skuInput"
+    placeholder="Digite o SKU do produto"
+    style="padding: 10px; border: 2px solid #ccc; border-radius: 8px; width: 250px;"
+  >
+  <button
+    onclick="buscarProdutoPorSKU()"
+    style="background-color: #ff4fa1; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer;"
+  >
+    <i class="fa fa-search"></i> Buscar
+  </button>
+</div>
+
+<!-- Aqui será exibido o resultado da busca -->
+<div id="resultadoProduto" style="margin-top: 20px; background: #f7f7f7; padding: 15px; border-radius: 10px; display: none;"></div>
+<script>
+  async function buscarProdutoPorSKU() {
+    const sku = document.getElementById('skuInput').value.trim();
+    const resultadoDiv = document.getElementById('resultadoProduto');
+
+    if (!sku) {
+      alert('Digite o SKU do produto.');
+      return;
+    }
+
+    try {
+      resultadoDiv.style.display = 'block';
+      resultadoDiv.innerHTML = '🔍 Buscando...';
+
+      const response = await fetch(`/bling/produtos?codigo=${sku}`);
+      const produtos = await response.json();
+
+      if (produtos.length === 0) {
+        resultadoDiv.innerHTML = '❌ Nenhum produto encontrado com esse SKU.';
+        return;
+      }
+
+      const produto = produtos[0]; // retorna o primeiro se houver mais de um
+
+      resultadoDiv.innerHTML = `
+        <h3>🔎 Produto encontrado:</h3>
+        <p><strong>Nome:</strong> ${produto.nome}</p>
+        <p><strong>SKU:</strong> ${produto.codigo}</p>
+        <p><strong>Preço:</strong> R$ ${produto.preco?.toFixed(2) || '---'}</p>
+        <p><strong>Estoque:</strong> ${produto.estoqueAtual ?? '---'}</p>
+      `;
+    } catch (error) {
+      console.error('Erro na busca:', error);
+      resultadoDiv.innerHTML = '❌ Ocorreu um erro ao buscar o produto.';
+    }
+  }
+</script>
+
+</body>
+</html>
