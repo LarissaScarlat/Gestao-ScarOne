@@ -8,10 +8,7 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3002;
-app.listen(port, () => {
-  console.log(`API rodando na porta ${port}`);
-});
+const PORT = process.env.PORT || 4000;
 
 
 app.use(cors());
@@ -142,72 +139,52 @@ blingRouter.get('/callback', async (req, res) => {
     refreshToken = response.data.refresh_token;
     saveTokens(response.data);
 
-    res.send('✅ Autorização concluída com sucesso! Agora você pode acessar os recursos da API Bling.');
+    res.send('✅ Autorização concluída com sucesso! Agora você pode acessar /bling/contas-a-pagar');
   } catch (error) {
     console.error('❌ Erro ao obter token:', error.response?.data || error.message);
     res.status(500).send('Erro ao obter token.');
   }
 });
 
-app.use('/bling', blingRouter);
-
-// Página inicial - ajuste link para nova rota de login Bling
-app.get('/', (req, res) => {
-  res.send('🔐 Vá para <a href="/bling/login">/bling/login</a> para iniciar o OAuth com Bling.');
-});
-
-// Inicialização
-loadTokens();
-setInterval(refreshAccessToken, 50 * 60 * 1000);
-
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
-});
-
-blingRouter.get('/pedidos-vendas', async (req, res) => {
+// Endpoint protegido para contas a pagar (paginação com delay)
+blingRouter.get('/contas-a-pagar', async (req, res) => {
   if (!accessToken) {
-    return res.status(401).send('Token de acesso não encontrado.');
+    return res.status(401).send('Token de acesso não encontrado. Acesse /bling/login primeiro.');
   }
 
+  const limite = 1000;
+  let pagina = 1;
+  let todasContas = [];
+  let continuar = true;
+
   try {
-    console.log('🔐 Token:', accessToken);
+    while (continuar) {
+      const response = await axios.get('https://api.bling.com.br/Api/v3/contas/pagar', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: 'application/json'
+        },
+        params: {
+          pagina,
+          limite,
+          ...req.query  // mantém outros parâmetros da query string, se existirem
+        }
+      });
 
-    const response = await axios.get('https://api.bling.com.br/Api/v3/pedidos/vendas', {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        Accept: 'application/json'
-      },
-      params: {
-        pagina: 1,
-        limite: 1000,
-        dataInicial: '2025-01-01',
-        dataFinal: '2025-12-31'
+      const contas = response.data.data || [];
+
+      if (contas.length === 0) {
+        continuar = false;
+      } else {
+        todasContas = todasContas.concat(contas);
+        pagina++;
+        await delay(400); // Espera 400ms para respeitar limite de 3 requisições por segundo
       }
-    });
+    }
 
-    const vendas = response.data?.data || [];
-
-    console.log('📦 Vendas recebidas:', vendas.length);
-    if (vendas.length > 0) console.log('🧾 Exemplo de venda:', vendas[0]);
-
-    const faturamentoTotal = vendas.reduce((soma, venda) => {
-      const valor = parseFloat(venda?.valorTotal?.toString() || "0");
-      return soma + valor;
-    }, 0);
-
-    const investimento = 10000;
-    const gastos = 3000;
-    const lucro = faturamentoTotal - investimento - gastos;
-
-    res.json({
-      faturamento: faturamentoTotal,
-      investimento,
-      gastos,
-      lucro
-    });
-
-  } catch (err) {
-    console.error('❌ Erro ao buscar faturamento:', err.response?.data || err.message);
-    res.status(500).json({ error: 'Erro ao buscar faturamento' });
+    res.json(todasContas);
+  } catch (error) {
+    console.error('❌ Erro ao buscar contas:', error.response?.data || error.message);
+    res.status(500).send('Erro ao buscar contas a pagar.');
   }
 });

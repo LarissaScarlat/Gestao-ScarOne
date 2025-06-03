@@ -1,6 +1,6 @@
-async function fetchTodosPedidos(filtros = {}) {
+async function fetchTodosGastos(filtros = {}) {
   const params = new URLSearchParams(filtros).toString();
-  const url = `https://bling.scarone.com.br/bling/pedidos/vendas?${params}`;
+  const url = `https://bling.scarone.com.br/bling/contas-a-pagar?${params}`;
   console.log('Buscando dados em:', url);
   const response = await fetch(url);
   console.log('Status da resposta:', response.status);
@@ -9,7 +9,6 @@ async function fetchTodosPedidos(filtros = {}) {
   console.log('Dados recebidos:', data);
   return data;
 }
-
 
 // Atualiza os cards de valores
 function atualizarCards(valores) {
