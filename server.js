@@ -7,6 +7,9 @@ import supabase from './db.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000
+app.listen(port, () => {
+  console.log(`API rodando na porta ${port}`);
+});
 
 const allowedOrigins = [
   'https://scarone.com.br',
