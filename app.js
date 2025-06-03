@@ -188,3 +188,46 @@ blingRouter.get('/contas-a-pagar', async (req, res) => {
     res.status(500).send('Erro ao buscar contas a pagar.');
   }
 });
+
+// Endpoint protegido para produtos (com paginação e delay)
+blingRouter.get('/produtos', async (req, res) => {
+  if (!accessToken) {
+    return res.status(401).send('Token de acesso não encontrado. Acesse /bling/login primeiro.');
+  }
+
+  const limite = 1000;
+  let pagina = 1;
+  let todosProdutos = [];
+  let continuar = true;
+
+  try {
+    while (continuar) {
+      const response = await axios.get('https://api.bling.com.br/Api/v3/produtos', {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          Accept: 'application/json'
+        },
+        params: {
+          pagina,
+          limite,
+          ...req.query  // permite filtros como nome, código, etc.
+        }
+      });
+
+      const produtos = response.data.data || [];
+
+      if (produtos.length === 0) {
+        continuar = false;
+      } else {
+        todosProdutos = todosProdutos.concat(produtos);
+        pagina++;
+        await delay(400); // Bling limita a 3 requisições por segundo
+      }
+    }
+
+    res.json(todosProdutos);
+  } catch (error) {
+    console.error('❌ Erro ao buscar produtos:', error.response?.data || error.message);
+    res.status(500).send('Erro ao buscar produtos.');
+  }
+});
