@@ -35,7 +35,7 @@
     <a href="#"><i class="fa-solid fa-chart-simple"></i> <span>Dashboard</span></a>
     <a href="#"><i class="fa-solid fa-file"></i> <span>Relatórios</span></a>
     <a href="/Painel/Ordem de compra/compras.html"><i class="fa-solid fa-truck"></i> <span>Compras</span></a>
-    <a href="/Painel/Vendas/vendas.html"><i class="fa-solid fa-money-bill"></i> <span>Vendas</span></a>
+    <a href="#"><i class="fa-solid fa-money-bill"></i> <span>Vendas</span></a>
     <a href="/Painel/Produtos/produtos.html"><i class="fa-solid fa-box-archive"></i> <span>Produtos</span></a>
     <a href="#"><i class="fa-solid fa-medal"></i> <span>Meta</span></a>
   </nav>
@@ -76,69 +76,3 @@
     </a>
   </div>
 </div>
-
-<div class="menu-horizontal-data" id="menu-horizontal-data">
-  <div class="filtro-info" id="btn-filtro" style="cursor:pointer;">
-    <i class="fa-solid fa-filter"></i>
-    <div class="filtro-texto">
-      <strong>Filtro</strong>
-      <span>Verificar períodos e comparar</span>
-    </div>
-  </div>
-  <div class="filtro-seta" id="seta-filtro">
-    <i class="fa-solid fa-arrow-right"></i>
-  </div>
-</div>
-
-<div class="painel-filtro" id="painel-filtro" style="display:none;">
-  <label>Escolha o período:</label>
-  <div class="abas-periodo">
-    <button class="aba" data-tipo="dia">Dia</button>
-<button class="aba" data-tipo="semana">Semana</button>
-<button class="aba" data-tipo="mes">Mês</button>
-
-  </div>
-</div>
-
-<div class="calendario-container" id="calendario-container" style="display: none;">
-  <input id="datepicker" class="calendario-input" placeholder="Escolha a data" />
-</div>
- 
-
-<div class="cards-valores">
-
-  <div class="card card-verde">
-    <h4>Total de faturamento</h4>
-    <h2 id="faturamento">R$0,00</h2>
-  </div>
-
-  <div class="card card-azul">
-    <h4>Valor investido em produtos</h4>
-    <h2 id="investimento">R$0,00</h2>
-  </div>
-
-  <div class="card card-vermelho">
-    <h4>Valor total de gastos</h4>
-   <h2 id="gastos">R$0,00</h2>
-    
-  </div>
-  <div class="card card-roxo">
-  <h4>Lucro liquido</h4>
-  <h2 id="lucro">R$0,00</h2> <!-- Exemplo: 50.000 + 130.000 -->
-</div>
-</div>
-
-<br><br>
-<div class="grafico-expandido">
-  <canvas id="graficoFaturamentoLucro"></canvas>
-</div>
-
-
-</main>
-
-<script src="/Painel/filtro.js" defer></script>
-<script type="module" src="/Painel/Dashboard/cards.js"></script>
-
-
-</body>
-</html>
